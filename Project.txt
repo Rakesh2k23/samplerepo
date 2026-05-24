@@ -1,0 +1,43 @@
+file uploading:
+
+One Line Interview Summary
+"Doctor selects files in the modal — FileReader converts them to Base64 strings in memory — Axios posts them as JSON along with notes to Express — protect middleware verifies JWT — controller saves everything embedded inside the MongoDB consultation document using Mongoose. For display, we fetch without the Base64 data to save bandwidth, and only fetch the full Base64 when downloading — converting it back to a Blob using atob() to trigger the browser download. For deletion, we use MongoDB's $pull operator which surgically removes only that one file object from the embedded array without touching the rest."
+
+visibility:
+"I used visibilitychange for tab switching, window focus for app switching, and setInterval as a 30-second fallback — all three silently call the same fetch function, 
+and a useRef timestamp throttle ensures they don't spam the API if triggered rapidly."
+
+Complete Program Flow — Root to Feature:
+1. index.html — The Real Starting Point
+2. main.jsx — React Starts Here
+3.AuthContext.jsx — Runs First (Wraps Everything)
+4.App.jsx — Sets Up All Routes
+5.ProtectedRoute.jsx — Security Gate
+6.MainNavbar.jsx — Reads Auth State (line number 117)
+7.Register.jsx — New User Signs Up
+8. Login.jsx — Existing User Logs In
+9. DoctorDashboard.jsx — Full Lifecycle
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Start with a One-Line Introduction
+"I built a Healthcare Appointment Management System . It supports two roles — Patient and Doctor — each with their own dashboard and features."
+
+2. Tech Stack (say it quickly)
+"For the frontend I used React with React Router for navigation and Bootstrap for UI. The backend is Express with MongoDB, and I used JWT for authentication."
+
+3. Explain the Features by Role
+Authentication flow:
+"When a user registers, they choose a role — Patient or Doctor. After register or login, a JWT token is stored in sessionStorage and attached to every API call via an Axios interceptor."
+Patient side:
+"A patient can book an appointment by selecting a doctor, picking a date, and choosing from available time slots. The system automatically filters out already-booked slots, holidays, and past times for today. They can also reschedule or cancel from their dashboard."
+Doctor side:
+"The doctor sees all their appointments. They can add consultation notes and prescription, upload documents like PDFs or images, cancel appointments, and view a patient's full medical history."
+
+4. Highlight a Technical Challenge & How You Solved It
+"One challenge was real-time sync between tabs. If a patient books an appointment in one tab and the doctor has their dashboard open in another tab, the doctor's list wouldn't update without refreshing. I solved this using the browser's visibilitychange event and window focus event — so whenever the doctor switches back to their tab, it silently re-fetches appointments in the background. I also added 30-second polling as a fallback."
+
+5. Talk About State Management
+"I used React Context for global auth state so the logged-in user is accessible across all components without prop drilling. All other state is local — managed with useState and useEffect inside each component."
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Axios Interceptors
+Axios interceptors are middleware functions that run before a request is sent or after a response is received — letting you intercept and transform them globally.
